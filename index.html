@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Mapeamento da Educação Bahia</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Análise dos indicadores de todas as escolas públicas e privadas da Bahia. Baseado nos dados abertos publicados pela INEP">
+    <meta name="keywords" content="Escola,Creche,Educação,Bahia,Inep,Dados Abertos,Transparência">
+    <meta name="author" content="Marcos Netto">
+    <link rel="ICON" href="icon/favicon.ico" type="image/ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/modal.css">
+    <link href="css/estilo.css" rel="stylesheet">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+  </head>
+
+  <body>
+    <header class="main-header">
+      <a href="index.html" id="logo">
+        <span class="novo-logo">
+          <b>Mapeando</b>
+          Educação
+        </span>
+      </a>
+      <div class="navbar">
+        <a class="sidebar-toggle">
+          <div class="sidebar-btn" onclick="showSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </a>
+      </div>
+    </header>
+    <div class="page">
+      <div id="sidebar">
+        <div class="sidebar-menu" >
+          <ul>
+            <li>
+              <a class="active" href="index.html">
+                <img class="icon" src="icon/escola.png"></img>
+                <span class="name">
+                  Mapa
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="estatisticas.html">
+                <img class="icon" src="icon/estatisticas.png"></img>
+                <span class="name">
+                  Estatísticas
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="sobre.html">
+                <img class="icon" src="icon/sobre.png"></img>
+                <span class="name">
+                  Sobre
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div> 
+      <div id="content-wrapper">
+        <section class="content" style="padding: 0;">
+          <section class="map">
+            <div id="floating-panel">
+              <input onclick="todasEscolas();" type=button value="Todas">
+              <input onclick="apenasFederal();" type=button value="Federais">
+              <input onclick="apenasEstadual();" type=button value="Estaduais">
+              <input onclick="apenasMunicipal();" type=button value="Municipais">
+            </div>
+            <div id='map'></div>
+          </section>
+          <div id="modal" class="modal">
+            <div <div class="background" id="background" onclick="closeModal()"></div>
+            <div class="modal-content">
+              <section class="container">
+                <span class="close cursor" onclick="closeModal()">&times;</span>
+                <div class="row">
+                  <div class="span12">
+                    <h2><a id="nome" href=""></a></h2> </div>
+                </div>
+                <div class="row">
+                  <div class="span6">
+                    <div class="modal-table highlight">
+                      <h3>Dados Gerais</h3>
+                      <table class="table table-striped">
+                        <tbody>
+                          <tr>
+                            <th>Código INEP</th>
+                            <td><span id="cod"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Tipo</th>
+                            <td><span id="dependenciaAdministrativaTxt"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Endereço</th>
+                            <td><span id="endereco"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Municipio</th>
+                            <td><span id="nomeMunicipio"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Estado</th>
+                            <td><span id="siglaUf"></span></td>
+                          </tr>
+                          <th>Localização da Escola</th>
+                          <td><span id="tipoLocalizacaoTxt"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Regulamentada</th>
+                            <td><span id="regulamentadaTxt"></span> </td>
+                          </tr>
+                          <tr>
+                            <th>Situacao</th>
+                            <td><span id="situacaoFuncionamentoTxt"></span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-table">
+                      <h3>Outras Informações</h3>
+                      <table class="table table-striped">
+                        <tbody>
+                          <tr>
+                            <th>Número de Funcionários</th>
+                            <td>
+                              <span id="funcionarios"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Salas Existentes</th>
+                            <td><span id="salasExistentes"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Salas Utilizadas</th>
+                            <td><span id="salasUtilizadas"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Ensino Regular</th>
+                            <td><span id="ensinoRegular"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Atividades Complementares</th>
+                            <td><span id="atividadeComplementar"></span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-table">
+                      <h3>Alimentação</h3>
+                      <table class="table table-striped">
+                        <tbody>
+                          <tr>
+                            <th>Alimentação é fornecida aos alunos?</th>
+                            <td>
+                              <span id="alimentacao"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>A escola possui água filtrada?</th>
+                            <td><span id="aguaFiltrada"></span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-table">
+                      <h3>Ensino</h3>
+                      <table class="table table-striped">
+                        <tbody>
+                          <tr>
+                            <th>Creche</th>
+                            <td>
+                              <span id="regCreche"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Pré Escola</th>
+                            <td><span id="regPreescola"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Ensino Fundamental</th>
+                            <td><span id="regFundamental8"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Ensino Médio</th>
+                            <td><span id="regMedioMedio"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Ensino Médio Profissionalizante</th>
+                            <td><span id="regMedioProfissional"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Educação de Jovens e Adultos</th>
+                            <td><span id="ensinoEja"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Educação Especial</th>
+                            <td><span id="ensinoEspecial"></span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="span6">
+                    <div class="modal-table">
+                      <h3>Acessibilidade</h3>
+                      <table class="table table-striped">
+                        <tbody>
+                          <tr>
+                            <th>As dependências da escola são acessíveis aos portadores de deficiência?</th>
+                            <td><span id="dependenciasPNE"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Os sanitários são acessíveis aos portadores de deficiência?</th>
+                            <td><span id="sanitarioPNE">Sim</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-table">
+                      <h3>Infraestrutura (dependências)</h3>
+                      <table class="table table-striped">
+                        <tbody>
+                          <tr>
+                            <th>Existe sanitário dentro do prédio da escola?</th>
+                            <td><span id="sanitarioDentroPredio">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>Existe sanitário fora do prédio da escola?</th>
+                            <td><span id="sanitarioForaPredio">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>A escola possui biblioteca?</th>
+                            <td><span id="biblioteca">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>A escola possui cozinha?</th>
+                            <td><span id="cozinha">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>A escola possui laboratório de informática?</th>
+                            <td><span id="laboratorioInformatica">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>A escola possui laboratório de ciências?</th>
+                            <td><span id="laboratorioCiencias">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>A escola possui sala de leitura?</th>
+                            <td><span id="salaLeitura">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>A escola possui quadra de esportes?</th>
+                            <td><span id="quadraCoberta">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>A escola possui sala para a diretoria?</th>
+                            <td><span id="salaDiretoria">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>A escola possui sala para os professores?</th>
+                            <td><span id="salaProfessores">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>A escola possui sala de atendimento especial?</th>
+                            <td><span id="atendimentoEspecial">Sim</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-table">
+                      <h3>Equipamentos</h3>
+                      <table class="table table-striped">
+                        <tbody>
+                          <tr>
+                            <th>Aparelho de DVD</th>
+                            <td><span id="dvds">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>Impressora</th>
+                            <td><span id="impressoras">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>Copiadora</th>
+                            <td><span id="copiadoras">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>Retroprojetor</th>
+                            <td><span id="retroprojetores">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>Televisão</th>
+                            <td><span id="televisores">Sim</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-table">
+                      <h3>Saneamento Básico</h3>
+                      <table class="table table-striped">
+                        <tbody>
+                          <tr>
+                            <th>Abastecimento de água</th>
+                            <td><span id="abastecimentoAgua"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Abastecimento de energia</th>
+                            <td><span id="abastecimentoEnergia">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>Destino do esgoto</th>
+                            <td><span id="abastecimentoEsgoto">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>Destino do Lixo</th>
+                            <td><span id="abastecimentoLixo">Sim</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-table">
+                      <h3>Computadores e Internet</h3>
+                      <table class="table table-striped">
+                        <tbody>
+                          <tr>
+                            <th>Internet</th>
+                            <td><span id="internet">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>Banda larga</th>
+                            <td><span id="bandaLarga">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>Computadores para uso dos alunos</th>
+                            <td><span id="computadoresAlunos">Sim</span></td>
+                          </tr>
+                          <tr>
+                            <th>Computadores para uso administrativo</th>
+                            <td><span id="computadoresAdm">Sim</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+          </section>
+          </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="js/buscar-dados.js"></script>
+    <script src="js/mapa.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/lista-escolas.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-IDGjoFJyDLpi7eIPlmPvS_cyKzhCXCo&callback=initMap">
+    </script>
+    <script type="text/javascript" src="js/teste.js"></script>
+  </body>
+  <div class="clearfix"></div>
+  <footer class="main-footer">
+    <strong>Copyright 2017 <a href="https://adminlte.io">Mapeando Educação</a>.</strong> All rights
+      reserved.
+  </footer>
+
+</html>

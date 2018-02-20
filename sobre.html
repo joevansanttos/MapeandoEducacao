@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Mapeamento da Educação Bahia</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Análise dos indicadores de todas as escolas públicas e privadas da Bahia. Baseado nos dados abertos publicados pela INEP">
+  <meta name="keywords" content="Escola,Creche,Educação,Bahia,Inep,Dados Abertos,Transparência">
+  <meta name="author" content="Marcos Netto">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="ICON" href="icon/favicon.ico" type="image/ico" />
+  <link rel="stylesheet" href="css/modal.css">
+  <link href="css/estilo.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+
+</head>
+
+<body>
+  <header class="main-header">
+    <a href="index.html" id="logo">
+      <span class="novo-logo">
+        <b>Mapeando</b>
+        Educação
+      </span>
+    </a>
+    <div class="navbar">
+      <a class="sidebar-toggle">
+        <div class="sidebar-btn" onclick="showSidebar()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </a>
+    </div>
+  </header>
+  <!-- Page-->
+  <div class="page">
+    <!-- Sidebar-->
+    <div id="sidebar">
+      <div class="sidebar-menu" >
+        <ul>
+          <li>
+            <a href="index.html">
+              <img class="icon" src="icon/escola.png"></img>
+              <span class="name">
+                Mapa
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="estatisticas.html">
+              <img class="icon" src="icon/estatisticas.png"></img>
+              <span class="name">
+                Estatísticas
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="active" href="sobre.html">
+              <img class="icon" src="icon/sobre.png"></img>
+              <span class="name">
+                Sobre
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Content-->
+    <div id="content-wrapper">
+      <!-- Content-->
+      <section class="content">
+        <div class="about">
+          <h2>O que Somos</h2>
+          <p>Estudantes da Universidade Federal da Bahia, na unidade de Salvador, desenvolvemos
+             esse sistema para ajudar empresas, escolas, usuários em geral a encontrarem dados 
+             sobre as escolas no Brasil.</p>
+        </div>
+        <div class="habilidades">
+          <h2>Habilidades</h2>
+          <div>
+            <p>HTML</p>
+            <div class="skills html">90%</div>
+            <p>CSS</p>
+            <div class="skills css">80%</div>
+            <p>JavaScript</p>
+            <div class="skills js">65%</div>
+            <p>Node</p>
+            <div class="skills node">60%</div>
+          </div>
+        </div>
+        <div class="time">
+          <h2>Nosso Time</h2>
+          <div class="membro">
+            <img src="img/avatar.png" class="img-circle">
+            <p class="nome"><strong>Joevan Santos</strong></p>
+            <p class="funcao">Desenvolvedor Frontend</p>
+          </div>
+          <div class="membro">
+            <img src="img/member.png" class="img-circle">
+            <p class="nome"><strong>Lucas Plácido</strong></p>
+            <p class="funcao">Desenvolvedor Frontend</p>
+          </div>
+          <div class="membro">
+            <img src="img/member.png" class="img-circle">
+            <p class="nome"><strong>Marcos Netto </strong></p>
+            <p class="funcao">Desenvolvedor Backend</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- Barra lateral -->  
+  <div class="clearfix"></div>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" src="js/charts.js"></script>
+  <script src="js/buscar-dados.js"></script>
+  <script src="js/teste.js"></script>
+  <script src="js/get-url-data.js"></script>
+  <script type="text/javascript" src="js/collapse-expand-boxes.js"></script>
+  <script src="js/mapa.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-IDGjoFJyDLpi7eIPlmPvS_cyKzhCXCo&callback=initMap">
+  </script>
+</body>
+<footer class="main-footer">
+  <strong>Copyright 2017 <a href="https://adminlte.io">Mapeando Educação</a>.</strong> All rights
+  reserved.
+</footer>
+</html>

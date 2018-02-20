@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Mapeamento da Educação Bahia</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Análise dos indicadores de todas as escolas públicas e privadas da Bahia. Baseado nos dados abertos publicados pela INEP">
+    <meta name="keywords" content="Escola,Creche,Educação,Bahia,Inep,Dados Abertos,Transparência">
+    <meta name="author" content="Marcos, Lucas e Edvam">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+	<link rel="stylesheet" href="css/modal.css">
+	<link href="css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" href="https://github.com/HubSpot/odometer/blob/master/themes/odometer-theme-default.css" /> -->
+	<link rel="stylesheet" href="http://github.hubspot.com/odometer/themes/odometer-theme-default.css" />
+	<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+
+</head>
+
+<body>
+	<header class="main-header">
+		<a href="index.html" id="logo" class="logo">
+	        <span class="novo-logo">
+	            <b>Mapeando</b>
+	            Educação
+	        </span>
+	    </a>
+		<div class="navbar">
+			<a class="sidebar-toggle">
+                <section class="sidebar-btn" onclick="showSidebar()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </section>
+            </a>
+			<div class="navbar-custom-menu">
+			</div>
+		</div>
+    </header>
+
+    <!-- Barra lateral -->
+	 <div id="sidebar">
+        <div class="user-panel">
+        </div>
+        <form method="get" onsubmit="get_action(this)" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                 <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                    <i class="fa fa-search"></i>
+                 </button>
+            </div>
+        </form>
+        <div class="sidebar-menu" >
+            <ul>
+                <li>
+                    <a href="escolas.html">
+                        <img src="icon/school.png"></img>
+                        <span class="name">
+                            Escolas
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="estatisticas.html">
+                        <img src="icon/graph.png"></img>
+                        <span class="name">
+                            Estatísticas
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="tabela.html">
+                        <img src="icon/table.png"></img>
+                        <span class="name">
+                            Tabelas
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="sobre.html">
+                        <img src="icon/about.png"></img>
+                        <span class="name">
+                            Sobre
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+	<div " id="content-wrapper">
+		<section class="content-header">
+			<!-- <nav class="flat">
+	  			<div class="nav-wrapper">
+	    			<div class="col s12">
+	      			<a href="#!" id="dropdown-container" class="breadcrumb">Brasil </a>
+		      		<a href="#!" class="breadcrumb">Bahia <i class="fa fa-caret-down"></i></i></a>
+		      		<a href="#!" class="breadcrumb">Salvador <i class="fa fa-caret-down"></i></a>
+		      		<a href="#!" class="breadcrumb">Escolha a escola <i class="fa fa-caret-down"></i></a>
+	    			</div>
+	  			</div>
+			</nav> -->
+			<ul id="breadcrumb">
+			  <li><a href="estatisticas.html"><span> </span> Brasil</a></li>
+			  <li><a href="#" id="dropdown-estado"><span class="fa fa-caret-down"></span> Escolha um estado</a></li>
+			  <li><a href="#" id="dropdown-cidade" style="display: none";><span class="fa fa-caret-down"> </span> Escolha uma cidade</a></li>
+			  <li><a href="#" id="dropdown-escola" style="display: none";><span class="fa fa-caret-down"> </span> Escolha uma escola</a></li>
+			</ul>
+
+			<div class="row">	
+				<div class="col-md-1">
+					<div id="dropdown-list-estado" class="dropdown-list" style="display: none;">
+		        		<input type="search" placeholder="Procurar Estados..." id="dropdown-search" class="dropdown-search" oninput="" ="myFunction()"/>
+		        		<ul id="dropdown-ul-estados"></ul>
+		    		</div>
+	    		</div>
+	    		<div class="col-md-1">
+		    		<div id="dropdown-list-cidade" class="dropdown-list" style="display: none;">
+		        		<input type="search" placeholder="Procurar Cidades..." id="dropdown-search_2" class="dropdown-search" onclick="" ="myFunction2()"/>
+		        		<ul id="dropdown-ul-cidades"></ul>
+		    		</div>
+	    		</div>
+	    		<div class="col-md-1">
+		    		<div id="dropdown-list-escola" class="dropdown-list" style="display: none;">
+		        		<input type="search" placeholder="Procurar Escolas..." id="dropdown-search_3" class="dropdown-search" onclick="" ="myFunction3()"/>
+		        		<ul id="dropdown-ul-escolas"></ul>
+		    		</div>
+	    		</div>
+	    		<div id="dropdown-list-mask" class="dropdown-list-mask" style="display: none;"></div>
+			</div>
+		</section>
+		<section class="content">
+			<div class="row">
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="info-box">
+						<span class="info-box-icon bg-green"><i class="ion-ios-home-outline"></i></span>
+
+						<div class="info-box-content">
+							<span id="numero-escolas" class="info-box-number odometer">0</span>
+							<span class="info-box-text">Escolas</span>
+						</div>
+						<!-- /.info-box-content -->
+					</div>
+					<!-- /.info-box -->
+				</div>
+				<!-- /.col -->
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="info-box">
+						<span class="info-box-icon bg-aqua"><i class="ion ion-ios-compose-outline"></i></span>
+
+						<div class="info-box-content">
+							<span id="numero-federais" class="info-box-number odometer">0</span>
+							<span class="info-box-text">Federais</span>
+						</div>
+						<!-- /.info-box-content -->
+					</div>
+					<!-- /.info-box -->
+				</div>
+				<!-- /.col -->
+
+				<!-- fix for small devices only -->
+				<div class="clearfix visible-sm-block"></div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="info-box">
+						<span class="info-box-icon bg-yellow"><i class="ion ion-ios-flask-outline"></i></span>
+						<div class="info-box-content">
+							<span id="numero-estaduais" class="info-box-number odometer">0</span>
+							<span class="info-box-text">Estaduais</span>
+						</div>
+						<!-- /.info-box-content -->
+					</div>
+					<!-- /.info-box -->
+				</div>
+				<!-- /.col -->
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="info-box">
+						<span class="info-box-icon bg-red"><i class="ion ion-ios-lightbulb-outline"></i></span>
+
+						<div class="info-box-content">
+							<span id="numero-municipais" class="info-box-number odometer">0</span>
+							<span class="info-box-text">Municipais</span>
+						</div>
+						<!-- /.info-box-content -->
+					</div>
+					<!-- /.info-box -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box">
+						<div class="box-header with-border">
+							<h3 class="box-title">Resultados e metas</h3>
+
+							<div class="box-tools pull-right">
+
+								<button type="button" class="btn btn-box-tool bt-collapse"><i class="font bt-minus accordion-title accordionTitle js-accordionTrigger" aria-expanded="false" aria-controls="accordion2"></i>
+                </button>
+								<!-- <button type="button" class="btn btn-box-tool bt-remove"><i class="font bt-remove">x</i></button> -->
+							</div>
+						</div>
+						<!-- /.box-header -->
+						<section class="accordion-content accordionItem animateIn" id="accordion2" aria-hidden="false">
+							<div class="box-body">
+								<div class="row">
+									<div class="col-md-8">
+										<p class="text-center">
+											<strong>Ideb: 2015</strong>
+										</p>
+
+										<div class="chart">
+											<!-- Sales Chart Canvas -->
+											<div id="barchart_material" style="width: 100%; height: 179px;"></div>
+										</div>
+										<!-- /.chart-responsive -->
+									</div>
+									<!-- /.col -->
+									<div class="col-md-4">
+										<p class="text-center">
+											<strong>Média Geral Enem</strong>
+										</p>
+
+										<div class="chart">
+											<!-- Sales Chart Canvas -->
+											<div id="barchart_material_2" style="width: 100%; height: 179px;"></div>
+										</div>
+										<!-- /.progress-group -->
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /.row -->
+							</div>
+							<!-- ./box-body -->
+							<div class="box-footer">
+								<div class="row">
+									<div class="col-sm-3 col-xs-6">
+										<div class="description-block border-right">
+											<span  class="description-percentage text-green"><i class="fa fa-bars"></i></span>
+											<h5 class="description-header"><span id="media-brasil" class="odometer">0</span></h5>
+											<span class="description-text">Media Brasil</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+									<!-- /.col -->
+									<div class="col-sm-3 col-xs-6">
+										<div class="description-block border-right">
+											<span id="porcentagem-estado" class="description-percentage text-yellow"></span>
+											<h5  class="description-header"><span id="media-estado" class="odometer">0</span></h5>
+											<span class="description-text">Media Estado</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+									<!-- /.col -->
+									<div class="col-sm-3 col-xs-6">
+										<div class="description-block border-right">
+											<span id="porcentagem-cidade"  class="description-percentage text-green"> </span>
+											<h5  class="description-header"><span id="media-cidade" class="odometer">0</span></h5>
+											<span class="description-text">Media Cidade</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+									<!-- /.col -->
+									<div class="col-sm-3 col-xs-6">
+										<div class="description-block">
+											<span id="porcentagem-escola"  class="description-percentage text-red"> </span>
+											<h5  class="description-header"><span id="media-escola" class="odometer">0</span></h5>
+											<span class="description-text">Media Escola</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+								</div>
+								<!-- /.row -->
+							</div>
+							<!-- /.box-footer -->
+						</section>
+					</div>
+					<!-- /.box -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<div class="box box-success">
+						<div class="box-header with-border">
+							<h3 class="box-title">Enem</h3>
+
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool bt-collapse"><i class="font bt-minus accordion-title accordionTitle js-accordionTrigger" aria-expanded="false" aria-controls="accordion3"></i>
+                				</button>
+							</div>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body no-padding accordion-content accordionItem animateIn" id="accordion3" aria-hidden="false">
+							<div class="row">
+								<div class="col-md-9 col-sm-8">
+								<div class="pad">
+									 <div class="progress-group">
+											<span  class="progress-text">Portugues</span>
+											<span class="progress-number"><b><span id="portugues" class="odometer">0</span></b>/1000</span>
+
+											<div class="progress sm">
+												<div id="porcentagem-portugues" class="progress-bar progress-bar-aqua" style="width: 0%"></div>
+											</div>
+										</div> 
+										<!-- /.progress-group -->
+										<div class="progress-group">
+											<span class="progress-text">Matematica</span>
+											<span class="progress-number"><b><span id="matematica" class="odometer">0</span></b>/1000</span>
+
+											<div class="progress sm">
+												<div id="porcentagem-matematica" class="progress-bar progress-bar-red" style="width: 0%"></div>
+											</div>
+										</div>
+										<!-- /.progress-group -->
+										<div class="progress-group">
+											<span class="progress-text">Humanas</span>
+											<span class="progress-number"><b><span id="humanas" class="odometer">0</span></b>/1000</span>
+
+											<div class="progress sm">
+												<div id="porcentagem-humanas" class="progress-bar progress-bar-green" style="width: 0%"></div>
+											</div>
+										</div>
+										<!-- /.progress-group -->
+										<div class="progress-group">
+											<span class="progress-text">Naturais</span>
+											<span  class="progress-number"><b><span id="naturais" class="odometer">0</span></b>/1000</span>
+
+											<div class="progress sm">
+												<div id="porcentagem-naturais" class="progress-bar progress-bar-yellow" style="width: 0%"></div>
+											</div>
+										</div>
+										<div class="progress-group">
+											<span class="progress-text">Redação</span>
+											<span  class="progress-number"><b><span id="redacao" class="odometer">0</span></b>/1000</span>
+
+											<div class="progress sm">
+												<div id="porcentagem-redacao" class="progress-bar progress-bar-red" style="width: 0%"></div>
+											</div>
+										</div>
+								</div></div>
+								
+								<!-- /.col -->
+							</div>
+							<!-- /.row -->
+						</div>
+						<!-- /.box-body -->
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="info-box bg-yellow">
+						<!-- <row>
+							<span style="max-height: 20px;">x</span>
+						</row> -->
+						<row>
+							<span class="info-box-icon"><i class="ion ion-android-laptop"></i></span>
+
+							<div class="info-box-content">
+								<span class="info-box-text">Computadores</span>
+								<span id="computadores" class="info-box-number odometer">0</span>
+
+								<div class="progress">
+									<div id="porcentagem-computadores" class="progress-bar" style="width: 0%"></div>
+								</div>
+								<span class="progress-description">Numero de Computadores</span>
+							</div>
+						</row>
+						<!-- /.info-box-content -->
+					</div>
+					<!-- /.info-box -->
+					<div class="info-box bg-green">
+						<span class="info-box-icon"><i class="ion ion-ios-people-outline"></i></span>
+
+						<div class="info-box-content">
+							<span class="info-box-text">Funcionarios</span>
+							<span id="funcionarios" class="info-box-number odometer">0</span>
+
+							<div class="progress">
+								<div id="porcentagem-funcionarios" class="progress-bar" style="width: 0%"></div>
+							</div>
+							<span class="progress-description">Numero de Funcionários </span>
+						</div>
+						<!-- /.info-box-content -->
+					</div>
+					<!-- /.info-box -->
+					<div class="info-box bg-red">
+						<span class="info-box-icon"><i class="ion ion-ios-home-outline"></i></span>
+
+						<div class="info-box-content">
+							<span class="info-box-text">Salas</span>
+							<span id="salas" class="info-box-number odometer">0</span>
+
+							<div class="progress">
+								<div id="porcentagem-salas" class="progress-bar" style="width: 0%"></div>
+							</div>
+							<span class="progress-description">Numero de Salas </span>
+						</div>
+						<!-- /.info-box-content -->
+					</div>
+					<!-- /.info-box -->
+					<div class="info-box bg-aqua">
+						<span class="info-box-icon"><i class="ion-ios-paper-outline"></i></span>
+
+						<div class="info-box-content">
+							<span class="info-box-text">Enem</span>
+							<span id="enem" class="info-box-number odometer">0</span>
+
+							<div class="progress">
+								<div id="porcentagem-enem" class="progress-bar" style="width: 0%"></div>
+							</div>
+							<span class="progress-description">Nota Média do Enem </span>
+						</div>
+						<!-- /.info-box-content -->
+					</div>
+					<!-- /.info-box -->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box">
+						<div class="box-header with-border">
+							<h3 class="box-title">Mapa das Escolas no Estado</h3>
+
+							<div class="box-tools pull-right">
+
+								<button type="button" class="btn btn-box-tool bt-collapse"><i class="font bt-minus accordion-title accordionTitle js-accordionTrigger" aria-expanded="false" aria-controls="accordion1"></i>
+                </button>
+								<!-- <button type="button" class="btn btn-box-tool bt-remove"><i class="font bt-remove">x</i></button> -->
+							</div>
+						</div>
+						<div class="box-body no-padding accordion-content accordionItem animateIn" id="accordion1" aria-hidden="false">
+							<div class="row">
+								<div class="col-md-10 col-sm-9">
+									<div id="floating-panel">
+								      <input onclick="todasEscolas();" type=button value="Todas">
+								      <input onclick="apenasFederal();" type=button value="Federais">
+								      <input onclick="apenasEstadual();" type=button value="Estaduais">
+								      <input onclick="apenasMunicipal();" type=button value="Municipais">
+								    </div>
+									<div id='map'></div>
+								</div>
+								<!-- /.col -->
+								<div class="col-md-2 col-sm-3 ">
+									<div class="pad box-pane-right bg-green" style="min-height: 280px">
+										<div class="description-block margin-bottom">
+											<div class="sparkbar pad" data-color="#fff"><canvas width="34" height="30" style="display: inline-block; width: 34px; height: 30px; vertical-align: top;"></canvas></div>
+											<h5 class="description-header"><span id="numero-escolas-mapa" class="odometer">0</span></h5>
+											<span class="description-text">Escolas</span>
+										</div>
+										<!-- /.description-block -->
+										<div class="description-block margin-bottom">
+											<div class="sparkbar pad" data-color="#fff"><canvas width="34" height="30" style="display: inline-block; width: 34px; height: 30px; vertical-align: top;"></canvas></div>
+											<h5 class="description-header">3</h5>
+											<span class="description-text">Municipios</span>
+										</div>
+										<!-- /.description-block -->
+										<div class="description-block">
+											<div class="sparkbar pad" data-color="#fff"><canvas width="34" height="30" style="display: inline-block; width: 34px; height: 30px; vertical-align: top;"></canvas></div>
+											<h5 class="description-header">8%</h5>
+											<span class="description-text">Estados</span>
+										</div>
+										<!-- /.description-block -->
+									</div>
+								</div>
+								<!-- /.col -->
+							</div>
+							<!-- /.row -->
+						</div>
+						<!-- /.box-body -->
+					</div>
+				</div>
+			</div>
+
+		</section>
+	</div>
+	<div class="clearfix"></div>
+
+	<!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<!-- // <script type="text/javascript" src="https://www.google.com/uds/modules/gviz/gviz-api.js"></script> -->
+	<script type="text/javascript" src="js/cookies.js"></script>
+	<script type="text/javascript" src="js/get-url-data.js"></script>
+	<script type="text/javascript" src="js/charts.js"></script>
+	<script type="text/javascript" src="js/breadcrumbs.js"></script>
+	<script type="text/javascript" src="js/lista-escolas.js"></script>
+	<script type="text/javascript" src="js/buscar-dados.js"></script>
+	<script type="text/javascript" src="js/modal.js"></script>
+	<script type="text/javascript" src="js/estatisticas.js"></script>
+	<script type="text/javascript" src="js/teste.js"></script>
+	
+	<script type="text/javascript" src="js/collapse-expand-boxes.js"></script>
+	<script type="text/javascript" src="http://github.hubspot.com/odometer/odometer.js"></script>
+
+
+
+	<script src="js/mapa.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-IDGjoFJyDLpi7eIPlmPvS_cyKzhCXCo&callback=initMap">
+	</script>
+
+</body>
+
+</html>

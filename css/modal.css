@@ -1,0 +1,111 @@
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  /*opacity: .0;
+  -moz-opacity: .0;
+  filter:alpha(opacity=0);*/
+}
+
+.modal-table {
+    margin-bottom: 30px;
+    float: left;
+}
+
+.modal-table h3 {
+  float: left;
+  width: 100%;
+  font-size: 20px;
+  margin-bottom: 15px
+}
+
+.modal-table table {
+  margin-bottom: 0;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+  width: 445px
+}
+
+.modal-table table.table-striped tbody>tr:nth-child(odd)>th, .modal-table table.table-striped tbody>tr:nth-child(odd)>td {
+  background-color: #e4e4e4
+}
+
+.modal-table table.table-less {
+  width: 345px
+}
+
+.modal-table small {
+  font-size: 11px;
+  color: #666;
+  text-align: center;
+  float: right
+}
+
+.modal-table .educacenso-block-identify-icon {
+  float: left;
+  margin-right: 10px
+}
+
+.modal-table.highlight table {
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd
+}
+
+.modal-table.highlight table tbody tr td, .modal-table.highlight table tbody tr th {
+  border: none;
+  background-color: #e4e4e4
+}
+
+.background {
+  z-index: 100;
+  position: fixed;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 98%;
+  height: 100%;
+  /*overflow: auto;*/
+  background-color: transparent;
+}
+
+.modal-content {
+  position: relative;
+  margin: auto;
+  padding: 0;
+  background-color: white;
+  width: 90%;
+  max-width: 1200px;
+  z-index: 101;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius:6px;
+  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 2px #333333;
+  background-clip: padding-box;
+  outline: none;
+}
+
+.close {
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}

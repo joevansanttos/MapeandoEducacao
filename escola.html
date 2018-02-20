@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Mapeamento da Educação na Bahia</title>
+  <!-- <link rel="icon" type="image/png" href="/assets/img/favicon.png" /> -->
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Análise dos indicadores de todas as escolas públicas e privadas da Bahia. Baseado nos dados abertos publicados pela INEP">
+  <meta name="keywords" content="Escola,Creche,Educação,Bahia,Inep,Dados Abertos,Transparência">
+  <meta name="author" content="Marcos Netto">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="google-site-verification" content="IJ7IQl-yqkcgfxMeo3xxferbw0MggAoE0DhRMM0Jgcc" />
+  <meta name="google-translate-customization" content="bc6ebec399d7e6a6-210c5243604455dd-g6014a3b41c31333f-21"></meta>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/escola.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 col-sm-4">
+          <div class="logo">
+            <h1><a href="index.html"><span class="color">Mapeando Educação</span></a></h1>
+            <p class="meta">Visualizando a Educação da Bahia</p>
+          </div>
+        </div>
+        <div class="col-md-7 col-sm-8">
+          <div class="navbar bs-docs-nav" role="banner">
+            <div class="navbar-header">
+              <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+            </div>
+            <nav class="collapse navbar"></nav>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+              <ul class="nav navbar-nav navbar-right">
+
+                <li><a href="/escolas">Escolas</a></li>
+                <li><a href="/escolas/estatisticas">Estatísticas</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="sep"></div>
+
+  <body>
+    <section class="container censo-section normal-section">
+      <div class="row">
+        <div class="span12">
+          <div class="social-section">
+            <div class="pull-right">
+
+            </div>
+          </div>
+          <h2>Matrículas e Infraestrutura <small class="sub-title"></small></h2> </div>
+        <div class="span12" id="ujeid_0">
+          <div class="census-ct row-fluid" id="ujeid_6">
+            <div class="census-filter buttons-census-filter-area enabled"> <label class="pull-left census-label" for="year">Ano:</label>
+              <!-- .census-btn -->
+            </div>
+            <!-- .census-filter -->
+          </div>
+          <!-- .census-ct -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="span6">
+          <div class="group-educacenso highlight">
+            <h3>Dados Gerais</h3>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th>Código INEP</th>
+                  '<td>'+ data.cod +'</td>'
+                </tr>
+                <tr>
+                  <th>Tipo</th>
+                  <td>'+ data.dependenciaAdministrativaTxt +'</td>
+                </tr>
+                <tr>
+                  <th>Endereço</th>
+                  <td>'+ data.endereco +' </td>
+                </tr>
+                <tr>
+                  <th>Municipio</th>
+                  <td>'+ data.nomeMunicipio +' </td>
+                </tr>
+                <tr>
+                  <th>Estado</th>
+                  <td>'+ data.siglaUf +' </td>
+                </tr>
+                  <th>Localização da Escola</th>
+                  <td>'+ data.tipoLocalizacaoTxt +'</td>
+                </tr>
+                <tr>
+                  <th>Regulamentada</th>
+                  <td>'+ data.regulamentadaTxt +' </td>
+                </tr>
+                <tr>
+                  <th>Situacao</th>
+                  <td>'+ data.Em atividade +' </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="group-educacenso">
+            <h3>Outras Informações</h3>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th>Número de Funcionários da Escola</th>
+                  <td>'+ data.funcionarios +'</td>
+                </tr>
+                <tr>
+                  <th>A escola possui organização por ciclos?</th>
+                  <td><span style="color: darkgreen">Sim</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="group-educacenso">
+            <h3>Alimentação</h3>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th>Alimentação é fornecida aos alunos?</th>
+                  <td>
+                    if (data.alimentacao == 'true')
+                      <span style="color: darkgreen">Sim</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th>A escola possui água filtrada?</th>
+                  if (data.alimentacao == 'true')
+                    <td><span style="color: darkgreen">Sim</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="group-educacenso">
+            <h3>Matrículas</h3>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th>Creche</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Pré escola</th>
+                  <td>42</td>
+                </tr>
+                <tr>
+                  <th>Anos iniciais (1ª a 4ª série ou 1º ao 5º ano)</th>
+                  <td>62</td>
+                </tr>
+                <tr>
+                  <th>Anos finais (5ª a 8ª série ou 6º ao 9º ano)</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Ensino Médio</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Educação de Jovens e Adultos</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Educação Especial</th>
+                  <td>0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="group-educacenso">
+            <h3>Matrículas por Série</h3>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th>Matrículas 1º ano EF</th>
+                  <td>26</td>
+                </tr>
+                <tr>
+                  <th>Matrículas 2º ano EF</th>
+                  <td>14</td>
+                </tr>
+                <tr>
+                  <th>Matrículas 3º ano EF</th>
+                  <td>22</td>
+                </tr>
+                <tr>
+                  <th>Matrículas 4º ano EF</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Matrículas 5º ano EF</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Matrículas 6º ano EF</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Matrículas 7º ano EF</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Matrículas 8º ano EF</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Matrículas 9º ano EF</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Matrículas 1º ano EM</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Matrículas 2º ano EM</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Matrículas 3º ano EM</th>
+                  <td>0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="span6">
+          <div class="group-educacenso">
+            <h3>Acessibilidade</h3>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th>As dependências da escola são acessíveis aos portadores de deficiência?</th>
+                  <td><span style="color: darkgreen">Sim</span></td>
+                </tr>
+                <tr>
+                  <th>Os sanitários são acessíveis aos portadores de deficiência?</th>
+                  <td><span style="color: red">Não</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="group-educacenso">
+            <h3>Infraestrutura (dependências)</h3>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th>Existe sanitário dentro do prédio da escola?</th>
+                  <td><span style="color: darkgreen">Sim</span></td>
+                </tr>
+                <tr>
+                  <th>Existe sanitário fora do prédio da escola?</th>
+                  <td><span style="color: red">Não</span></td>
+                </tr>
+                <tr>
+                  <th>A escola possui biblioteca?</th>
+                  <td><span style="color: red">Não</span></td>
+                </tr>
+                <tr>
+                  <th>A escola possui cozinha?</th>
+                  <td><span style="color: darkgreen">Sim</span></td>
+                </tr>
+                <tr>
+                  <th>A escola possui laboratório de informática?</th>
+                  <td><span style="color: red">Não</span></td>
+                </tr>
+                <tr>
+                  <th>A escola possui laboratório de ciências?</th>
+                  <td><span style="color: red">Não</span></td>
+                </tr>
+                <tr>
+                  <th>A escola possui sala de leitura?</th>
+                  <td><span style="color: darkgreen">Sim</span></td>
+                </tr>
+                <tr>
+                  <th>A escola possui quadra de esportes?</th>
+                  <td><span style="color: darkgreen">Sim</span></td>
+                </tr>
+                <tr>
+                  <th>A escola possui sala para a diretoria?</th>
+                  <td><span style="color: red">Não</span></td>
+                </tr>
+                <tr>
+                  <th>A escola possui sala para os professores?</th>
+                  <td><span style="color: red">Não</span></td>
+                </tr>
+                <tr>
+                  <th>A escola possui sala de atendimento especial?</th>
+                  <td><span style="color: red">Não</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="group-educacenso">
+            <h3>Equipamentos</h3>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th>Aparelho de DVD</th>
+                  <td><span style="color: darkgreen">Sim</span></td>
+                </tr>
+                <tr>
+                  <th>Impressora</th>
+                  <td><span style="color: darkgreen">Sim</span></td>
+                </tr>
+                <tr>
+                  <th>Copiadora</th>
+                  <td><span style="color: red">Não</span></td>
+                </tr>
+                <tr>
+                  <th>Retroprojetor</th>
+                  <td><span style="color: darkgreen">Sim</span></td>
+                </tr>
+                <tr>
+                  <th>Televisão</th>
+                  <td><span style="color: darkgreen">Sim</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="group-educacenso">
+            <h3>Saneamento Básico</h3>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th>Abastecimento de água</th>
+                  <td>Rede pública</td>
+                </tr>
+                <tr>
+                  <th>Abastecimento de energia</th>
+                  <td>Rede pública</td>
+                </tr>
+                <tr>
+                  <th>Destino do esgoto</th>
+                  <td>Fossa</td>
+                </tr>
+                <tr>
+                  <th>Destino do Lixo</th>
+                  <td>Coleta periódica</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="group-educacenso">
+            <h3>Computadores e Internet</h3>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th>Internet</th>
+                  <td><span style="color: darkgreen">Sim</span></td>
+                </tr>
+                <tr>
+                  <th>Banda larga</th>
+                  <td><span style="color: darkgreen">Sim</span></td>
+                </tr>
+                <tr>
+                  <th>Computadores para uso dos alunos</th>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th>Computadores para uso administrativo</th>
+                  <td>2</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </body>
+
+  <div class="sep"></div>
+
+  <div class="container">
+
+  </div>
+
+  <div class="clearfix"></div>
+
+</body>
+
+</html>
